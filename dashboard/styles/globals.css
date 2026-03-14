@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --crown: #C9973B;
+  --crown-light: #E8C06A;
+  --bg-primary: #0F0D0B;
+  --bg-surface: #1C1917;
+  --bg-elevated: #252119;
+  --border: rgba(201, 151, 59, 0.18);
+  --text-primary: #F5F0E8;
+  --text-muted: #9A9280;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--crown); border-radius: 3px; }
+
+/* Crown divider */
+.crown-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--crown), transparent);
+  opacity: 0.4;
+}
+
+/* Glass card */
+.glass-card {
+  background: rgba(28, 25, 23, 0.8);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #C9973B, #E8C06A, #C9973B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Input base */
+.input-base {
+  background: rgba(15, 13, 11, 0.8);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  padding: 10px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  width: 100%;
+  transition: border-color 0.2s;
+  outline: none;
+}
+.input-base:focus {
+  border-color: var(--crown);
+  box-shadow: 0 0 0 2px rgba(201, 151, 59, 0.12);
+}
+.input-base::placeholder { color: var(--text-muted); }
+
+/* Button primary */
+.btn-primary {
+  background: linear-gradient(135deg, #C9973B, #E8C06A);
+  color: #0F0D0B;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+  font-size: 14px;
+}
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+
+/* Button ghost */
+.btn-ghost {
+  background: transparent;
+  color: var(--crown);
+  border: 1px solid var(--border);
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  font-size: 14px;
+}
+.btn-ghost:hover {
+  border-color: var(--crown);
+  background: rgba(201, 151, 59, 0.06);
+}
+
+/* Status badges */
+.badge-open     { background: rgba(87, 242, 135, 0.12); color: #57F287; border: 1px solid rgba(87,242,135,0.25); }
+.badge-closed   { background: rgba(237, 66, 69, 0.12);  color: #ED4245; border: 1px solid rgba(237,66,69,0.25); }
+.badge-pending  { background: rgba(254, 231, 92, 0.12); color: #FEE75C; border: 1px solid rgba(254,231,92,0.25); }
+.badge-approved { background: rgba(87, 242, 135, 0.12); color: #57F287; border: 1px solid rgba(87,242,135,0.25); }
+.badge-rejected { background: rgba(237, 66, 69, 0.12);  color: #ED4245; border: 1px solid rgba(237,66,69,0.25); }
+
+.badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 99px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}

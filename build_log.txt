@@ -1,0 +1,112 @@
+time="2026-03-14T15:11:27-07:00" level=warning msg="The \"EyuJkjUGUYR\" variable is not set. Defaulting to a blank string."
+time="2026-03-14T15:11:27-07:00" level=warning msg="The \"EyuJkjUGUYR\" variable is not set. Defaulting to a blank string."
+time="2026-03-14T15:11:27-07:00" level=warning msg="The \"EyuJkjUGUYR\" variable is not set. Defaulting to a blank string."
+time="2026-03-14T15:11:27-07:00" level=warning msg="The \"EyuJkjUGUYR\" variable is not set. Defaulting to a blank string."
+time="2026-03-14T15:11:27-07:00" level=warning msg="C:\\Users\\mkdia\\OneDrive\\Desktop\\royalrecruit\\docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Image royalrecruit-dashboard Building 
+ Image royalrecruit-api Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.29kB done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 938B 0.0s done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:20-alpine
+#3 DONE 0.7s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 DONE 0.0s
+
+#6 [deps 1/4] FROM docker.io/library/node:20-alpine@sha256:b88333c42c23fbd91596ebd7fd10de239cedab9617de04142dde7315e3bc0afa
+#6 resolve docker.io/library/node:20-alpine@sha256:b88333c42c23fbd91596ebd7fd10de239cedab9617de04142dde7315e3bc0afa 0.0s done
+#6 DONE 0.1s
+
+#5 [internal] load build context
+#5 transferring context: 1.38kB 0.0s done
+#5 DONE 0.0s
+
+#7 [builder 3/5] COPY --from=deps /app/node_modules ./node_modules
+#7 CACHED
+
+#8 [deps 2/4] WORKDIR /app
+#8 CACHED
+
+#9 [deps 3/4] COPY package.json package-lock.json* ./
+#9 CACHED
+
+#10 [deps 4/4] RUN npm install
+#10 CACHED
+
+#11 [builder 4/5] COPY . .
+#11 CACHED
+
+#12 [builder 5/5] RUN npm run build
+#12 1.108 
+#12 1.108 > royalrecruit-dashboard@1.0.0 build
+#12 1.108 > next build
+#12 1.108 
+#12 2.278 Attention: Next.js now collects completely anonymous telemetry regarding usage.
+#12 2.279 This information is used to shape Next.js' roadmap and prioritize features.
+#12 2.279 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+#12 2.279 https://nextjs.org/telemetry
+#12 2.279 
+#12 2.390   Γû▓ Next.js 14.2.3
+#12 2.391 
+#12 2.392    Linting and checking validity of types ...
+#12 8.242 Failed to compile.
+#12 8.242 
+#12 8.242 ./pages/index.tsx:74:75
+#12 8.242 Type error: Cannot find name 'DISCORD_CLIENT_ID'.
+#12 8.242 
+#12 8.242 [0m [90m 72 |[39m             [33m<[39m[33m/[39m[33ma[39m[33m>[39m[0m
+#12 8.242 [0m [90m 73 |[39m             [33m<[39m[33ma[39m[0m
+#12 8.242 [0m[31m[1m>[22m[39m[90m 74 |[39m               href[33m=[39m{[32m`https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&permissions=268438544&scope=bot%20applications.commands`[39m}[0m
+#12 8.242 [0m [90m    |[39m                                                                           [31m[1m^[22m[39m[0m
+#12 8.242 [0m [90m 75 |[39m               target[33m=[39m[32m"_blank"[39m rel[33m=[39m[32m"noreferrer"[39m[0m
+#12 8.242 [0m [90m 76 |[39m               className[33m=[39m[32m"btn-ghost flex items-center gap-2 px-8 py-3 text-base"[39m[0m
+#12 8.242 [0m [90m 77 |[39m             [33m>[39m[0m
+#12 8.293 npm notice
+#12 8.293 npm notice New major version of npm available! 10.8.2 -> 11.11.1
+#12 8.293 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.11.1
+#12 8.293 npm notice To update run: npm install -g npm@11.11.1
+#12 8.293 npm notice
+#12 ERROR: process "/bin/sh -c npm run build" did not complete successfully: exit code: 1
+------
+ > [builder 5/5] RUN npm run build:
+8.242 [0m[31m[1m>[22m[39m[90m 74 |[39m               href[33m=[39m{[32m`https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&permissions=268438544&scope=bot%20applications.commands`[39m}[0m
+8.242 [0m [90m    |[39m                                                                           [31m[1m^[22m[39m[0m
+8.242 [0m [90m 75 |[39m               target[33m=[39m[32m"_blank"[39m rel[33m=[39m[32m"noreferrer"[39m[0m
+8.242 [0m [90m 76 |[39m               className[33m=[39m[32m"btn-ghost flex items-center gap-2 px-8 py-3 text-base"[39m[0m
+8.242 [0m [90m 77 |[39m             [33m>[39m[0m
+8.293 npm notice
+8.293 npm notice New major version of npm available! 10.8.2 -> 11.11.1
+8.293 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.11.1
+8.293 npm notice To update run: npm install -g npm@11.11.1
+8.293 npm notice
+------
+WARNING: The "EyuJkjUGUYR" variable is not set. Defaulting to a blank string.
+
+Dockerfile:19
+
+--------------------
+
+  17 |     ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+
+  18 |     
+
+  19 | >>> RUN npm run build
+
+  20 |     
+
+  21 |     FROM node:20-alpine AS runner
+
+--------------------
+
+failed to solve: process "/bin/sh -c npm run build" did not complete successfully: exit code: 1
+

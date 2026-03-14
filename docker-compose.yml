@@ -1,0 +1,79 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER:     royalrecruit
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      POSTGRES_DB:       royalrecruit
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U royalrecruit"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks: [royalrecruit]
+
+  api:
+    build: { context: ./backend, dockerfile: Dockerfile }
+    restart: unless-stopped
+    depends_on:
+      postgres: { condition: service_healthy }
+    environment:
+      DATABASE_URL:          "postgresql+asyncpg://royalrecruit:${POSTGRES_PASSWORD:-password}@postgres:5432/royalrecruit"
+      DISCORD_CLIENT_ID:     "${DISCORD_CLIENT_ID}"
+      DISCORD_CLIENT_SECRET: "${DISCORD_CLIENT_SECRET}"
+      DISCORD_REDIRECT_URI:  "${DISCORD_REDIRECT_URI:-http://localhost:3000/api/auth/callback}"
+      DISCORD_BOT_TOKEN:     "${DISCORD_BOT_TOKEN}"
+      JWT_SECRET_KEY:        "${JWT_SECRET_KEY:-change-me-in-production}"
+      TOKEN_ENCRYPTION_KEY:  "${TOKEN_ENCRYPTION_KEY}"
+      API_SECRET_KEY:        "${API_SECRET_KEY:-internal-api-secret-change-me}"
+      ALLOWED_ORIGINS:       '["http://localhost:3000"]'
+      ENVIRONMENT:           "${ENVIRONMENT:-production}"
+    ports: ["8000:8000"]
+    networks: [royalrecruit]
+
+  bot:
+    build: { context: ./bot, dockerfile: Dockerfile }
+    restart: unless-stopped
+    depends_on: [api]
+    environment:
+      DISCORD_BOT_TOKEN:  "${DISCORD_BOT_TOKEN}"
+      DISCORD_CLIENT_ID:  "${DISCORD_CLIENT_ID}"
+      BOT_API_BASE_URL:   "http://api:8000"
+      API_SECRET_KEY:     "${API_SECRET_KEY:-internal-api-secret-change-me}"
+      ENVIRONMENT:        "${ENVIRONMENT:-production}"
+      DEV_GUILD_ID:       "${DEV_GUILD_ID:-}"
+      TOPGG_TOKEN:        "${TOPGG_TOKEN:-}"
+      SUPPORT_SERVER_URL: "${SUPPORT_SERVER_URL:-}"
+      PRIVACY_POLICY_URL: "${PRIVACY_POLICY_URL:-}"
+      BOT_INVITE_URL:     "${BOT_INVITE_URL:-}"
+    networks: [royalrecruit]
+
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_DISCORD_CLIENT_ID=${DISCORD_CLIENT_ID}
+        - NEXT_PUBLIC_DISCORD_REDIRECT_URI=${DISCORD_REDIRECT_URI:-http://localhost:3000/api/auth/callback}
+        - NEXT_PUBLIC_API_URL=http://localhost:8000
+    restart: unless-stopped
+    depends_on: [api]
+    environment:
+      NEXT_PUBLIC_API_URL:              "http://localhost:8000"
+      NEXT_PUBLIC_DISCORD_CLIENT_ID:    "${DISCORD_CLIENT_ID}"
+      NEXT_PUBLIC_DISCORD_REDIRECT_URI: "${DISCORD_REDIRECT_URI:-http://localhost:3000/api/auth/callback}"
+      INTERNAL_API_URL:                 "http://api:8000"
+    ports: ["3000:3000"]
+    networks: [royalrecruit]
+
+volumes:
+  postgres_data:
+
+networks:
+  royalrecruit:
+    driver: bridge
